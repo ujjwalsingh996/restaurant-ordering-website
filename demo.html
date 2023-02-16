@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordering Tech</title>
+</head>
+<body>
+    <form onSubmit =  "saveToBackEnd(event)">
+        <label for="price">Choose Price:</label>
+        <input type="text" id="price" name="chooseprice">
+        <label for="dish">Choose Dish:</label>
+        <input type="text" id="dish" name="choosedish">
+        <label for="dish">Choose a table:</label>
+        <select name="table" id="table">
+            <option value="blank"> </option>
+            <option value="table1">Table 1</option>
+            <option value="table2">Table 2</option>
+            <option value="table3">Table 3</option>
+        </select>
+        <input type="submit" value="Add to Bill">
+    </form>
+    
+    <ul id="listoftables">
+        <li id="ordertable1"><h1>TABLE 1</h1></li><br>
+        <li id="ordertable2"><h1>TABLE 2</h1></li><br>
+        <li id="ordertable3"><h1>TABLE 3</h1></li>
+    </ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="demo.js"></script>
+</body>
+</html>
