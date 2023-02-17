@@ -13,7 +13,7 @@ function saveToBackEnd(event) {
         table
     }
 
-    axios.post('https://crudcrud.com/api/9f351587e00c4d1784af1e528a079a6f/applicationData', obj)
+    axios.post('https://crudcrud.com/api/ce82664f9c734a13a46d0cbcb8744936/applicationData', obj)
     .then((response) => {
         showUserOnScreen(response.data)
         document.getElementById('price').value = '';
@@ -27,7 +27,7 @@ function saveToBackEnd(event) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    axios.get('https://crudcrud.com/api/9f351587e00c4d1784af1e528a079a6f/applicationData')
+    axios.get('https://crudcrud.com/api/ce82664f9c734a13a46d0cbcb8744936/applicationData')
     .then((response) => {
         for(var i = 0; i<response.data.length; i++)
         {
@@ -43,7 +43,7 @@ function showUserOnScreen(obj) {
 
     
     const childElemnt = `<li id = ${obj._id}> ${obj.price} - ${obj.dish} - ${obj.table}
-    <button onclick = deleteuser('${obj._id}')> Delete Dish </button>
+    <button onclick = deleteuser('${obj._id}','${obj.table}')> Delete Dish </button>
     </li>`
     if(obj.table === 'table1')
     {
@@ -64,18 +64,41 @@ function showUserOnScreen(obj) {
     
 }
 
-function deleteuser(objId) {
-    axios.delete(`https://crudcrud.com/api/9f351587e00c4d1784af1e528a079a6f/applicationData/${objId}`)
+function deleteuser(objId, objtable) {
+    axios.delete(`https://crudcrud.com/api/ce82664f9c734a13a46d0cbcb8744936/applicationData/${objId}`)
     .then((response) => {
-        removeUserfromScreen(objId)
+        removeUserfromScreen(objId, objtable)
     })
     .catch(err => console.log(err))
 }
 
-function removeUserfromScreen(objId){
-    const parentElement= document.getElementById('listoftables')
-    const childNodeTobeDeleted = document.getElementById(id)
-    if(childNodeTobeDeleted){
+function removeUserfromScreen(objId, objtable){
+    if(objtable === 'table1')
+    {
+        const parentElement = document.getElementById('ordertable1')
+        const childNodeTobeDeleted = document.getElementById(objId)
         parentElement.removeChild(childNodeTobeDeleted)
+        console.log("Deleted 1")
+
+    }
+    else if(objtable === 'table2')
+    {
+        const parentElement = document.getElementById('ordertable2')
+        const childNodeTobeDeleted = document.getElementById(objId)
+        if(childNodeTobeDeleted){
+            parentElement.removeChild(childNodeTobeDeleted)
+            console.log("Deleted 2")
+        }
+        
+    }
+    else if(objtable === 'table3')
+    {
+        const parentElement = document.getElementById('ordertable3')
+        const childNodeTobeDeleted = document.getElementById(objId)
+        if(childNodeTobeDeleted){
+            parentElement.removeChild(childNodeTobeDeleted)
+        }
+        console.log("Deleted 3")
+        
     }
 }
